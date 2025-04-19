@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | ADM</title>
+  <link rel="icon" type="image/png" href="ChatGPT Image Apr 14, 2025, 09_17_31 PM.png">
+  <style>
+    :root {
+      --bg-color-dark: linear-gradient(-45deg, #1a1a2e, #16213e);
+      --bg-color-light: linear-gradient(-45deg, #ffefba, #ff5f6d);
+      --text-color-dark: #ffffff;
+      --text-color-light: #000000;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-color-dark);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      color: var(--text-color-dark);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .logo {
+      width: 60px;
+      margin: 20px auto 10px;
+      display: block;
+    }
+
+    .settings-box {
+      max-width: 400px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+
+    .settings-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .setting {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    select, input[type="checkbox"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    @media (max-width: 480px) {
+      .settings-box {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <img src="ChatGPT Image Apr 14, 2025, 09_17_31 PM.png" alt="ADM Logo" class="logo" />
+
+  <div class="settings-box">
+    <h2>Settings</h2>
+    <div class="setting">
+      <label for="theme">Theme</label>
+      <select id="theme">
+        <option value="dark">Dark</option>
+        <option value="light">Sunset (Yellow-Red)</option>
+      </select>
+    </div>
+    <div class="setting">
+      <label for="fontSize">Font Size</label>
+      <select id="fontSize">
+        <option value="normal">Normal</option>
+        <option value="large">Large</option>
+        <option value="xlarge">Extra Large</option>
+      </select>
+    </div>
+    <div class="setting">
+      <label for="animations">Disable Animations</label>
+      <input type="checkbox" id="animations" />
+    </div>
+  </div>
+
+  <script>
+    const themeSelect = document.getElementById('theme');
+    const fontSizeSelect = document.getElementById('fontSize');
+    const animationToggle = document.getElementById('animations');
+
+    window.onload = () => {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      const savedFontSize = localStorage.getItem('fontSize') || 'normal';
+      const animationsDisabled = localStorage.getItem('animations') === 'true';
+
+      themeSelect.value = savedTheme;
+      fontSizeSelect.value = savedFontSize;
+      animationToggle.checked = animationsDisabled;
+
+      applyTheme(savedTheme);
+      applyFontSize(savedFontSize);
+      if (animationsDisabled) disableAnimations();
+    };
+
+    themeSelect.onchange = () => {
+      localStorage.setItem('theme', themeSelect.value);
+      applyTheme(themeSelect.value);
+    };
+
+    fontSizeSelect.onchange = () => {
+      localStorage.setItem('fontSize', fontSizeSelect.value);
+      applyFontSize(fontSizeSelect.value);
+    };
+
+    animationToggle.onchange = () => {
+      const isDisabled = animationToggle.checked;
+      localStorage.setItem('animations', isDisabled);
+      if (isDisabled) disableAnimations();
+      else location.reload();
+    };
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        document.body.style.background = getComputedStyle(document.documentElement).getPropertyValue('--bg-color-light');
+        document.body.style.color = getComputedStyle(document.documentElement).getPropertyValue('--text-color-light');
+      } else {
+        document.body.style.background = getComputedStyle(document.documentElement).getPropertyValue('--bg-color-dark');
+        document.body.style.color = getComputedStyle(document.documentElement).getPropertyValue('--text-color-dark');
+      }
+    }
+
+    function applyFontSize(size) {
+      if (size === 'large') document.body.style.fontSize = '1.25rem';
+      else if (size === 'xlarge') document.body.style.fontSize = '1.5rem';
+      else document.body.style.fontSize = '1rem';
+    }
+
+    function disableAnimations() {
+      const styles = document.createElement('style');
+      styles.innerHTML = '* { animation: none !important; transition: none !important; }';
+      document.head.appendChild(styles);
+    }
+  </script>
+</body>
+</html>

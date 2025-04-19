@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vector-v3 | Assists Help</title>
+  <link rel="icon" type="image/png" href="ChatGPT Image Apr 14, 2025, 09_17_31 PM.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #000000, #6a0dad);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      color: white;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .header {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .header img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; }
+    }
+
+    .chat-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .chat-box {
+      height: 300px;
+      overflow-y: auto;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .chat-message {
+      margin: 10px 0;
+    }
+
+    .chat-message.user {
+      text-align: right;
+      color: #00ffff;
+    }
+
+    .chat-message.vector {
+      text-align: left;
+      color: #ff80ff;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .input-area button {
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: none;
+      background-color: #6a0dad;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .chat-container {
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="ChatGPT Image Apr 14, 2025, 09_17_31 PM.png" alt="Vector Logo">
+    <h1>Vector-v3</h1>
+    <p>Your personal assistant</p>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Ask anything...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById('chatBox');
+    const userInput = document.getElementById('userInput');
+
+    function sendMessage() {
+      const input = userInput.value.trim();
+      if (input === '') return;
+
+      addMessage('user', input);
+      userInput.value = '';
+
+      setTimeout(() => {
+        const response = getVectorResponse(input);
+        addMessage('vector', response);
+      }, 500);
+    }
+
+    function addMessage(sender, text) {
+      const msg = document.createElement('div');
+      msg.className = `chat-message ${sender}`;
+      msg.textContent = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function getVectorResponse(input) {
+      const lower = input.toLowerCase();
+      
+      // Friendly responses
+      const friendlyReplies = {
+        "hi": "Hey! How's it going?",
+        "hello": "Hello! What's up?",
+        "hey": "Hey hey! What's on your mind?",
+        "yo": "Yo! What’s up?",
+        "how are you": "I'm doing great! Thanks for asking! How about you?",
+        "thank you": "You're welcome! Glad to help!",
+        "thanks": "Anytime! Feel free to ask me anything!",
+        "bye": "Goodbye! Take care!",
+        "good morning": "Good morning! Hope you're having a good day!",
+        "good night": "Good night! Sleep well!",
+        "help": "I can help you with anything! Just ask away.",
+        "yes": "Yes! What can I help with?",
+        "no": "No worries, let me know if you need anything else!",
+        "maybe": "Maybe! I'm not sure, but I'll try my best to help!",
+        "what's up": "Not much, just here to help you out! What's up with you?"
+      };
+
+      // If input matches any friendly responses, reply accordingly
+      for (let key in friendlyReplies) {
+        if (lower.includes(key)) return friendlyReplies[key];
+      }
+
+      // Default response if no match found
+      return "Hmm, I'm not sure about that. Can you tell me more?";
+    }
+
+    userInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+ 
+</body>
+</html>
