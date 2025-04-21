@@ -126,6 +126,15 @@
     const chatBox = document.getElementById('chatBox');
     const userInput = document.getElementById('userInput');
 
+    // Load saved chat on page load
+    window.onload = () => {
+      const savedChat = localStorage.getItem("vectorChat");
+      if (savedChat) {
+        chatBox.innerHTML = savedChat;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    };
+
     function sendMessage() {
       const input = userInput.value.trim();
       if (input === '') return;
@@ -145,12 +154,14 @@
       msg.textContent = text;
       chatBox.appendChild(msg);
       chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Save chat
+      localStorage.setItem("vectorChat", chatBox.innerHTML);
     }
 
     function getVectorResponse(input) {
       const lower = input.toLowerCase();
-      
-      // Friendly responses
+
       const friendlyReplies = {
         "hi": "Hey! How's it going?",
         "hello": "Hello! What's up?",
@@ -169,12 +180,10 @@
         "what's up": "Not much, just here to help you out! What's up with you?"
       };
 
-      // If input matches any friendly responses, reply accordingly
       for (let key in friendlyReplies) {
         if (lower.includes(key)) return friendlyReplies[key];
       }
 
-      // Default response if no match found
       return "Hmm, I'm not sure about that. Can you tell me more?";
     }
 
@@ -182,6 +191,6 @@
       if (e.key === "Enter") sendMessage();
     });
   </script>
- 
+
 </body>
 </html>
