@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | ADM PLAY</title>
+  <link rel="icon" type="image/png" href="ChatGPT Image Apr 14, 2025, 09_17_31 PM.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a1d);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      overflow-x: hidden;
+      color: white;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .header img {
+      width: 90px;
+      height: 90px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-top: 15px;
+      text-shadow: 0 0 15px #00ffe7, 0 0 30px #6a0dad;
+    }
+
+    .about-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 20px;
+      font-size: 1.1rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media screen and (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .about-content {
+        padding: 30px 15px;
+        font-size: 1rem;
+      }
+
+      .header img {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    .particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: floatUp 10s linear infinite;
+    }
+
+    .particle.white {
+      background: white;
+      bottom: -20px;
+      left: 50%;
+    }
+
+    .particle.blue {
+      background: #00f0ff;
+      left: -20px;
+      top: 50%;
+    }
+
+    .particle.red {
+      background: #ff3c3c;
+      right: -20px;
+      top: 50%;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-100vh) scale(0.5); }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="animationCanvas"></canvas>
+  <div class="header">
+    <img src="ChatGPT Image Apr 14, 2025, 09_17_31 PM.png" alt="Vector Logo">
+    <h1>About Us | ADM PLAY</h1>
+  </div>
+
+  <div class="about-content">
+    Hey Guys,This is the CEO of ADM-CLAN. As a Child, i always wanted to play games but some games which are the paid one, i couldn't afford it.And now,
+     I brought for you People a chance to download the games which you want.And also we will soon bring Vector-v3 back as powerful as Any other AI.
+     <br>
+     <br>
+     <br>
+     <br>
+    VECTOR-V3 DESIGNER ---- DEV-SUNNY  
+    <br>
+    <br>
+    HOMEPAGE,GAMES BACKGROUND FEATURES ----- DEV-BITTU   
+    <br>
+    <br>
+    GAMES APPICABLE ----- DEV-SUNNY 
+    <br>
+    <br>
+    CEO ------ ADM (SUNNY)    
+    <br>
+    <br>
+    CO-FOUNDER ------ ADM (SUNNY,BITTU)   
+  </div>
+
+
+  <!-- Particles -->
+  <div class="particle white" style="left: 45%; animation-delay: 0s;"></div>
+  <div class="particle white" style="left: 55%; animation-delay: 2s;"></div>
+  <div class="particle blue" style="top: 55%; animation-delay: 3s;"></div>
+  <div class="particle blue" style="top: 65%; animation-delay: 5s;"></div>
+  <div class="particle red" style="top: 35%; animation-delay: 1s;"></div>
+  <div class="particle red" style="top: 75%; animation-delay: 4s;"></div>
+
+  <script>
+    const canvas = document.getElementById("animationCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const shapes = [];
+    for (let i = 0; i < 50; i++) {
+      shapes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 3 + 2,
+        dx: (Math.random() - 0.5) * 2,
+        dy: (Math.random() - 0.5) * 2
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let shape of shapes) {
+        ctx.beginPath();
+        ctx.arc(shape.x, shape.y, shape.r, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff11';
+        ctx.fill();
+
+        shape.x += shape.dx;
+        shape.y += shape.dy;
+
+        if (shape.x < 0 || shape.x > canvas.width) shape.dx *= -1;
+        if (shape.y < 0 || shape.y > canvas.height) shape.dy *= -1;
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
